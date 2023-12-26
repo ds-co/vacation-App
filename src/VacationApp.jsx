@@ -1,237 +1,98 @@
-// import React from "react";
-// import styled from "styled-components";
-// import { useForm } from "react-hook-form";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-// const FormContainer = styled.form`
-//   max-width: 500px;
-//   margin: 0 auto;
-// `;
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 600px; /* 원하는 너비로 조절 */
+  height: 500px; /* 원하는 높이로 조절 */
+  margin: auto; /* 수직 및 수평 가운데 정렬을 위해 */
+  border-radius: 30px;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-// // const Heading = styled.h1`
-// //   font-weight: 100;
-// //   color: white;
-// //   text-align: center;
-// //   padding-bottom: 10px;
-// //   border-bottom: 1px solid rgb(79, 98, 148);
-// // `;
+  input {
+    width: 80%; /* Set the width to 100% of the container */
+    padding: 10px; /* Add padding for better appearance */
+    margin-bottom: 15px; /* Add some space between input fields */
+    font-size: 16px; /* Adjust font size as needed */
+  }
 
-// // const Form = styled.div`
-// //   background: #0e101c;
-// //   max-width: 400px;
-// //   margin: 0 auto;
-// // `;
+  textarea {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
 
-// const ErrorMessage = styled.p`
-//   color: #bf1650;
-
-//   &::before {
-//     display: inline;
-//     content: "⚠ ";
-//   }
-// `;
-
-// const Input = styled.input`
-//   display: block;
-//   box-sizing: border-box;
-//   width: 100%;
-//   border-radius: 4px;
-//   border: 1px solid black;
-//   padding: 10px 15px;
-//   margin-bottom: 10px;
-//   font-size: 14px;
-// `;
-
-// // const Label = styled.label`
-// //   line-height: 2;
-// //   text-align: left;
-// //   display: block;
-// //   margin-bottom: 13px;
-// //   margin-top: 20px;
-// //   color: white;
-// //   font-size: 14px;
-// //   font-weight: 200;
-// // `;
-
-// const SubmitButton = styled.button`
-//   background: skyblue;
-//   color: white;
-//   text-transform: uppercase;
-//   border: none;
-//   margin-top: 40px;
-//   padding: 20px;
-//   font-size: 16px;
-//   font-weight: 100;
-//   letter-spacing: 10px;
-
-//   &:hover {
-//     background: gray;
-//   }
-
-//   &:active {
-//     transition: 0.3s all;
-//     transform: translateY(3px);
-//     border: 1px solid transparent;
-//     opacity: 0.8;
-//   }
-// `;
-
-// // const DisabledInput = styled.input`
-// //   opacity: 0.4;
-// // `;
-
-// // Additional styles...
-
-// function VacationApp() {
-//     const {
-//       register,
-//       handleSubmit,
-//       watch,
-//       formState: { errors }
-//     } = useForm();
-  
-//     const onSubmit = (data) => {
-//       console.log(data);
-//     };
-  
-//     console.log(watch("example"))
-
-//   return (
-//       <FormContainer onSubmit={handleSubmit(onSubmit)}>
-//         <Input defaultValue="test" {...register("example")} />
-
-//         <Input {...register("exampleRequired", { required: true })} />
-//         {errors.exampleRequired && <ErrorMessage>This field is required</ErrorMessage>}
-
-//         <SubmitButton type="submit">휴가신청</SubmitButton>
-//       </FormContainer>
-//   );
-// }
-
-import React from "react";
-import styled from "styled-components";
-import { useForm } from "react-hook-form";
-
-const FormContainer = styled.form`
-  max-width: 500px;
-  margin: 0 auto;
-`;
-
-const Label = styled.label`
-  display: block;
-  margin-bottom: 8px;
-  color: black;
-  font-size: 14px;
-  font-weight: bold; /* Added to make the label bold */
-`;
-
-
-const ErrorMessage = styled.p`
-  color: #bf1650;
-  &::before {
-    display: inline;
-    content: "⚠ ";
+  button {
+    /* Add button styles here if needed */
   }
 `;
 
-const Input = styled.input`
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid black;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  font-size: 14px;
-`;
+const VacationApp = () => {
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [vacationType, setVacationType] = useState('');
+  const [reason, setReason] = useState('');
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-const Select = styled.select`
-  width: 100%;
-  padding: 10px 15px;
-  border-radius: 4px;
-  border: 1px solid black;
-  margin-bottom: 10px;
-  font-size: 14px;
-`;
+  const handleApplication = () => {
+    if (startDate && endDate && vacationType && reason) {
+      console.log({
+        startDate,
+        endDate,
+        vacationType,
+        reason,
+      });
 
-const TextArea = styled.textarea`
-  width: 100%;
-  padding: 10px 15px;
-  border-radius: 4px;
-  border: 1px solid black;
-  margin-bottom: 10px;
-  font-size: 14px;
-`;
-
-const SubmitButton = styled.button`
-  background: skyblue;
-  color: white;
-  text-transform: uppercase;
-  border: none;
-  margin-top: 40px;
-  padding: 20px;
-  font-size: 16px;
-  font-weight: 100;
-  letter-spacing: 10px;
-
-  &:hover {
-    background: gray;
-  }
-
-  &:active {
-    transition: 0.3s all;
-    transform: translateY(3px);
-    border: 1px solid transparent;
-    opacity: 0.8;
-  }
-`;
-
-function VacationApp() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors }
-  } = useForm();
-
-  const onSubmit = (data) => {
-    
-    console.log(data);
+      // Show the success message
+      setShowSuccessMessage(true);
+    } else {
+      // Show a reminder to fill in all fields
+      setShowSuccessMessage(false);
+      alert('모든 항목을 입력하세요');
+    }
   };
 
-  console.log(watch("example"));
-
   return (
-    <FormContainer onSubmit={handleSubmit(onSubmit)}>
-      <Label htmlFor="startDate">시작일</Label>
-      <Input {...register("startDate", { required: true })} type="date" />
+    <FormContainer>
+      {/* Add your form inputs here */}
+      <label>시작일:</label>
+      <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+      <br />
 
-      <Label htmlFor="endDate">종료일</Label>
-      <Input {...register("endDate", { required: true })} type="date" />
+      <label>종료일:</label>
+      <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+      <br />
 
-      <Label htmlFor="vacationType">휴가 종류</Label>
-      <Select {...register("vacationType", { required: true })}>
-        <option value="">휴가 종류 선택</option>
-        <option value="연차">연차</option>
-        <option value="반차">반차</option>
-        <option value="예비군훈련">예비군훈련</option>
-        <option value="가족돌봄휴가">가족돌봄휴가</option>
-      </Select>
-
-      <Label htmlFor="reason">휴가 사유</Label>
-      <TextArea
-        {...register("reason", { required: true })}
-        placeholder="휴가 사유를 입력해주세요."
-        rows="4"
+      <label>종류:</label>
+      <input
+        type="text"
+        value={vacationType}
+        onChange={(e) => setVacationType(e.target.value)}
       />
+      <br />
 
-      {errors.startDate && <ErrorMessage>시작일을 입력해주세요.</ErrorMessage>}
-      {errors.endDate && <ErrorMessage>종료일을 입력해주세요.</ErrorMessage>}
-      {errors.vacationType && <ErrorMessage>휴가 종류를 선택해주세요.</ErrorMessage>}
-      {errors.reason && <ErrorMessage>휴가 사유를 입력해주세요.</ErrorMessage>}
+      <label>사유:</label>
+      <textarea value={reason} onChange={(e) => setReason(e.target.value)} />
+      <br />
 
-      <SubmitButton type="submit">휴가신청</SubmitButton>
+      {/* Button to submit the form */}
+      <button onClick={handleApplication}>휴가신청</button>
+      
+      {showSuccessMessage && (
+        <div>
+          <p>휴가 신청이 완료되었습니다</p>
+        </div>
+      )}
     </FormContainer>
   );
-}
+};
 
 export default VacationApp;

@@ -2,10 +2,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import "./App.css";
 
 const LoginForm = ({ onLoginSuccess }) => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+
+  console.log(onLoginSuccess);
 
   const sendData = async () => {
     try {
@@ -43,7 +46,7 @@ const LoginForm = ({ onLoginSuccess }) => {
   return (
     <>
       <LoginDiv>
-        {/* Input fields for id and pw */}
+        <h1>로그인</h1>
         <InputField
           type="text"
           placeholder="아이디"
@@ -56,18 +59,26 @@ const LoginForm = ({ onLoginSuccess }) => {
           value={pw}
           onChange={(e) => setPw(e.target.value)}
         />
-        {/* Login button */}
+        
         <Button onClick={sendData}>로그인</Button>
       </LoginDiv>
     </>
   );
 };
-
 const LoginDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 90vh;
+  justify-content: center;
+  width: 600px; /* 원하는 너비로 조절 */
+  height: 500px; /* 원하는 높이로 조절 */
+  margin: auto; /* 수직 및 수평 가운데 정렬을 위해 */
+  border-radius: 30px;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const InputField = styled.input`

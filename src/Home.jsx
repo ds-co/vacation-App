@@ -1,4 +1,5 @@
 // Home.jsx
+import './App.css';
 import React, { useState, useEffect } from "react";
 import LoginForm from "./LoginForm";
 import VacationApp from "./VacationApp";  // Import VacationApp
@@ -23,7 +24,6 @@ const Home = () => {
 
   return (
     <div>
-      <h1>연차관리</h1>
       {isLoggedIn ? (
         <>
           <button onClick={handleLogout}>로그아웃</button>
