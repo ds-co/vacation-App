@@ -5,10 +5,9 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 600px; /* 원하는 너비로 조절 */
-  height: 500px; /* 원하는 높이로 조절 */
-  margin: auto; /* 수직 및 수평 가운데 정렬을 위해 */
+  width: 600px;
+  height: 500px;
+  margin: auto;
   border-radius: 30px;
   background: white;
   position: absolute;
@@ -16,11 +15,17 @@ const FormContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
+  label {
+    width: 80%;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
   input {
-    width: 80%; /* Set the width to 100% of the container */
-    padding: 10px; /* Add padding for better appearance */
-    margin-bottom: 15px; /* Add some space between input fields */
-    font-size: 16px; /* Adjust font size as needed */
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
   }
 
   textarea {
@@ -30,10 +35,22 @@ const FormContainer = styled.div`
     font-size: 16px;
   }
 
+  select {
+    width: 85%;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+
   button {
-    /* Add button styles here if needed */
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    text-align: center;
   }
 `;
+
 
 const VacationApp = () => {
   const [startDate, setStartDate] = useState('');
@@ -62,7 +79,7 @@ const VacationApp = () => {
 
   return (
     <FormContainer>
-      {/* Add your form inputs here */}
+      <h1>휴가신청</h1>
       <label>시작일:</label>
       <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
       <br />
@@ -72,11 +89,17 @@ const VacationApp = () => {
       <br />
 
       <label>종류:</label>
-      <input
-        type="text"
-        value={vacationType}
-        onChange={(e) => setVacationType(e.target.value)}
-      />
+      <select value={vacationType} onChange={(e) => setVacationType(e.target.value)}>
+        <option value="1">연차</option>
+        <option value="2">반차</option>
+        <option value="3">반반차</option>
+        <option value="4">예비군훈련</option>
+        <option value="5">출산휴가</option>
+        <option value="6">배우자출산휴가</option>
+        <option value="7">생리휴가</option>
+        <option value="8">가족돌봄휴가</option>
+        <option value="9">그 외</option>
+      </select>
       <br />
 
       <label>사유:</label>
